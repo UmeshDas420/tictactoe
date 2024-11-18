@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <style>
+        #myCanvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="300" height="300"></canvas>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const cellSize = 100; // Each cell is 100x100 pixels
+
+        // Draw the grid
+        function drawGrid() {
+            ctx.lineWidth = 2;
+            for (let i = 1; i <= 2; i++) {
+                // Vertical lines
+                ctx.beginPath();
+                ctx.moveTo(i * cellSize, 0);
+                ctx.lineTo(i * cellSize, canvas.height);
+                ctx.stroke();
+
+                // Horizontal lines
+                // ctx.beginPath();
+                // ctx.moveTo(0, i * cellSize);
+                // ctx.lineTo(canvas.width, i * cellSize);
+                // ctx.stroke();
+            }
+        }
+
+        // Draw a line for the winner
+        function drawWinLine(startCell, endCell) {
+            const [startX, startY] = [
+                startCell[1] * cellSize + cellSize / 2,
+                startCell[0] * cellSize + cellSize / 2
+            ];
+            const [endX, endY] = [
+                endCell[1] * cellSize + cellSize / 2,
+                endCell[0] * cellSize + cellSize / 2
+            ];
+
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 5;
+
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+        }
+
+        // Example: Simulate a win line from top-left to bottom-right
+        drawGrid();
+        drawWinLine([0, 0], [2, 2]);
+    </script>
+</body>
+</html>
